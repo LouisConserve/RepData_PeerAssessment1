@@ -122,24 +122,6 @@ $(document).ready(function () {
 </div>
 
 
-<div id="reproducible-research-project-1" class="section level3">
-<h3>Reproducible Research Project 1</h3>
-</div>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the “quantified self” movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.</p>
-<p>This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.</p>
-</div>
-<div id="data-for-the-analysis" class="section level2">
-<h2>Data For the Analysis</h2>
-<p>The data can be downloaded from the course web site:</p>
-<p>Dataset: Activity Monitoring Data [52K]</p>
-<p>The variables included in this dataset are:</p>
-<p>steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)</p>
-<p>date: The date on which the measurement was taken in YYYY-MM-DD format</p>
-<p>interval: Identifier for the 5-minute interval in which measurement was taken</p>
-<p>The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.</p>
-</div>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
 <pre class="r"><code>## Loading
@@ -221,7 +203,6 @@ mergeData &lt;- rbind(clean, newdata2)
 ##Create sum of steps per date to compare with step 1
 sumTable2 &lt;- aggregate(mergeData$steps ~ mergeData$date, FUN=sum, )
 colnames(sumTable2)&lt;- c(&quot;Date&quot;, &quot;Steps&quot;)
-
 ## Mean of Steps with NA data taken care of
 as.integer(mean(sumTable2$Steps))</code></pre>
 <pre><code>## [1] 10821</code></pre>
@@ -243,10 +224,8 @@ legend(&quot;topright&quot;, c(&quot;Imputed Data&quot;, &quot;Non-NA Data&quot;
 mergeData$DayCategory &lt;- ifelse(mergeData$day %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;), &quot;Weekend&quot;, &quot;Weekday&quot;)
 
 library(lattice)
-
 ## Summarize data by interval and type of day
 intervalTable2 &lt;- ddply(mergeData, .(interval, DayCategory), summarize, Avg = mean(steps))
-
 ##Plot data in a panel plot
 xyplot(Avg~interval|DayCategory, data=intervalTable2, type=&quot;l&quot;,  layout = c(1,2),
        main=&quot;Average Steps per Interval Based on Type of Day&quot;, 
