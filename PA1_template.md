@@ -67,6 +67,7 @@ intervalTable <- ddply(clean, .(interval), summarize, Avg = mean(steps))
 ##Create line plot of average number of steps per interval
 p <- ggplot(intervalTable, aes(x=interval, y=Avg), xlab = "Interval", ylab="Average Number of Steps")
 p + geom_line()+xlab("Interval")+ylab("Average Number of Steps")+ggtitle("Average Number of Steps per Interval")
+![Sample panel plot](Chunk2.1.png) 
 
 ##Maximum steps by interval
 maxSteps <- max(intervalTable$Avg)
@@ -116,6 +117,7 @@ hist(sumTable2$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with N
 hist(sumTable$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day with NAs Fixed", col="Grey", add=T)
 legend("topright", c("Imputed Data", "Non-NA Data"), fill=c("black", "grey") )
 ```
+![Sample panel plot](Chunk3.1.png) 
 
 The new mean of the imputed data is 10821 steps compared to the old mean of 10766 steps. That creates a difference of 55 steps on average per day.
 
@@ -136,6 +138,7 @@ xyplot(Avg~interval|DayCategory, data=intervalTable2, type="l",  layout = c(1,2)
        main="Average Steps per Interval Based on Type of Day", 
        ylab="Average Number of Steps", xlab="Interval")
 ```
+![Sample panel plot](Chunk4.1.png) 
 
 Yes, the step activity trends are different based on whether the day occurs on a weekend or not. This may be due to people having an increased opportunity for activity beyond normal work hours for those who work during the week.
 
