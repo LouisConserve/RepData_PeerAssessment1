@@ -67,13 +67,13 @@ intervalTable <- ddply(clean, .(interval), summarize, Avg = mean(steps))
 ##Create line plot of average number of steps per interval
 p <- ggplot(intervalTable, aes(x=interval, y=Avg), xlab = "Interval", ylab="Average Number of Steps")
 p + geom_line()+xlab("Interval")+ylab("Average Number of Steps")+ggtitle("Average Number of Steps per Interval")
-![Sample panel plot](Chunk2.1.png) 
 
 ##Maximum steps by interval
 maxSteps <- max(intervalTable$Avg)
 ##Which interval contains the maximum average number of steps
 intervalTable[intervalTable$Avg==maxSteps,1]
 ```
+![Sample panel plot](Chunk2.1.png) 
 
 The maximum number of steps for a 5-minute interval was 206 steps.
 
